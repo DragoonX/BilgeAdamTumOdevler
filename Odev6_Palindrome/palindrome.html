@@ -1,0 +1,12 @@
+<html>
+    <head><title>Palindrome musun?</title></head>
+    <body>
+        <input type="text" id="yazi" />
+        <button onclick="palindrome(document.getElementById('yazi').value)">Kontrol Et</button>
+        <script>
+            function palindrome(str){
+                (str === str.split('').reverse().join('')) ? alert("Palindrome dur") : alert("Palindrome değildir") ;
+            }
+        </script>
+    </body>
+</html>

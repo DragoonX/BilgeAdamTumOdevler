@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <title>Hesap Makinesi</title>
+        <style>
+        td{
+            margin: auto;
+            width: 1em;
+            border: 2px solid black;
+            padding: 0.5em;
+        }
+        button{
+            width: 5em;
+            height: 3em;
+            margin: 0px;
+            font-size: 1em;
+        }
+        #btn_eq{
+            width: 100%;
+        }
+        #textbox{
+            width: 100%;
+            height: 70%;
+            font-size: 3em;
+            text-align: right;
+            display: block;
+        }
+        </style>
+    </head>
+    <body onload="tamtemizle()">
+        <script>
+        
+        var ilksayi=0;
+        var sonuc=0;
+        var operator="";
+
+        function temizle(){
+            document.getElementById("textbox").value = "0";
+        }
+
+        function tamtemizle(){
+            document.getElementById("textbox").value = "0";
+            ilksayi=0;
+            sonuc=0;
+            operator="";
+        }
+
+        function topla(){
+            operator="+";
+            ilksayi = Number(document.getElementById("textbox").value);
+            temizle();
+        }
+
+        function cikar(){
+            operator="-";
+            ilksayi = Number(document.getElementById("textbox").value);
+            temizle();
+        }
+
+        function carp(){
+            operator="*";
+            ilksayi = Number(document.getElementById("textbox").value);
+            temizle();
+        }
+
+        function bol(){
+            operator="/";
+            ilksayi = Number(document.getElementById("textbox").value);
+            temizle();
+        }
+
+        function esittir(){
+            var ikincisayi = Number(document.getElementById("textbox").value);
+            switch(operator){
+                case "+":
+                sonuc=ilksayi+ikincisayi;
+                document.getElementById("textbox").value = sonuc;
+                break;
+
+                case "-":
+                sonuc=ilksayi-ikincisayi;
+                document.getElementById("textbox").value = sonuc;
+                break;
+
+                case "*":
+                sonuc=ilksayi*ikincisayi;
+                document.getElementById("textbox").value = sonuc;
+                break;
+
+                case "/":
+                sonuc=ilksayi/ikincisayi;
+                document.getElementById("textbox").value = sonuc;
+                break;
+
+                default:
+                break;
+            }
+        }
+
+        function sil(){
+            if(document.getElementById("textbox").value != 0 || document.getElementById("textbox").value != null){
+                var val = document.getElementById("textbox").value;
+                document.getElementById("textbox").value = val.substr(0, val.length - 1);
+
+                if(document.getElementById("textbox").value == ""){
+                    document.getElementById("textbox").value = "0";
+                }
+            }
+        }
+
+        function tusbas(sayi){
+            if(document.getElementById("textbox").value == "0")
+                document.getElementById("textbox").value = "";
+            document.getElementById("textbox").value += sayi;
+        }
+
+        function tussifir(){
+            if(document.getElementById("textbox").value == "0" || document.getElementById("textbox").value == null )
+                document.getElementById("textbox").value = "0";
+            else
+                document.getElementById("textbox").value += "0";
+        }
+
+        function virgul(){
+            if(!document.getElementById("textbox").value.includes(".")){
+                document.getElementById("textbox").value +=".";
+            }
+            else
+                document.getElementById("textbox").value = "";
+        }
+        
+        </script>
+        <table>
+            <tr>
+                <td colspan="4"><input type="text" id="textbox" readonly></td>
+            </tr>
+            <tr>
+                <td><button id="btn_del" onclick="sil()">DEL</button></td>
+                <td><button id="btn_ac" onclick="tamtemizle()">AC</button></td>
+                <td><button id="btn_c" onclick="temizle()">C</button></td>
+                <td><button id="btn_divide" onclick="bol()">/</button></td>
+            </tr>
+            <tr>
+                <td><button id="btn_7" onclick="tusbas(7)">7</button></td>
+                <td><button id="btn_8" onclick="tusbas(8)">8</button></td>
+                <td><button id="btn_9" onclick="tusbas(9)">9</button></td>
+                <td><button id="btn_times" onclick="carp()">*</button></td>
+            </tr>
+            <tr>
+                <td><button id="btn_4" onclick="tusbas(4)">4</button></td>
+                <td><button id="btn_5" onclick="tusbas(5)">5</button></td>
+                <td><button id="btn_6" onclick="tusbas(6)">6</button></td>
+                <td><button id="btn_minus" onclick="cikar()">-</button></td>
+            </tr>
+            <tr>
+                <td><button id="btn_1" onclick="tusbas(1)">1</button></td>
+                <td><button id="btn_2" onclick="tusbas(2)">2</button></td>
+                <td><button id="btn_3" onclick="tusbas(3)">3</button></td>
+                <td><button id="btn_+" onclick="topla()">+</button></td>
+            </tr>
+            <tr>
+                <td><button id="btn_0" onclick="tussifir()">0</button></td>
+                <td><button id="btn_comma" onclick="virgul()">,</button></td>
+                <td colspan="2"><button id="btn_eq" onclick="esittir()">=</button></td>
+            </tr>
+        </table>
+    </body>
+</html>
